@@ -1,0 +1,1207 @@
+{
+  "checkpoint": "data/runs/mushroom-v1",
+  "n_rows": 500,
+  "seed": 0,
+  "overlap": {
+    "sample_rows": 500,
+    "novel_rows": 500
+  },
+  "vocab": {
+    "stalk-root": [
+      "b",
+      "e",
+      "c",
+      "r"
+    ],
+    "spore-print-color": [
+      "w",
+      "n",
+      "k",
+      "h",
+      "r",
+      "u",
+      "b",
+      "o",
+      "Other"
+    ],
+    "habitat": [
+      "d",
+      "g",
+      "p",
+      "l",
+      "u",
+      "m",
+      "w"
+    ]
+  },
+  "protocols": {
+    "single": {
+      "stalk-root": {
+        "laya": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.96,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.96
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.96
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.992,
+                "accuracy_on_filled": 0.9597
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.972,
+                "accuracy_on_filled": 0.9712
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.87,
+                "accuracy_on_filled": 0.9908
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.96,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.96
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.96
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.992,
+                "accuracy_on_filled": 0.9597
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.972,
+                "accuracy_on_filled": 0.9712
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.87,
+                "accuracy_on_filled": 0.9908
+              }
+            ]
+          }
+        },
+        "naive_bayes": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.98,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.98
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.98
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.974,
+                "accuracy_on_filled": 0.9938
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.964,
+                "accuracy_on_filled": 0.9979
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.956,
+                "accuracy_on_filled": 0.9979
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.98,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.98
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.98
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.974,
+                "accuracy_on_filled": 0.9938
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.964,
+                "accuracy_on_filled": 0.9979
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.956,
+                "accuracy_on_filled": 0.9979
+              }
+            ]
+          }
+        },
+        "majority": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.664,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.664,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              }
+            ]
+          }
+        }
+      },
+      "spore-print-color": {
+        "laya": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.604,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.604
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.712,
+                "accuracy_on_filled": 0.6461
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.276,
+                "accuracy_on_filled": 1.0
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.276,
+                "accuracy_on_filled": 1.0
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.276,
+                "accuracy_on_filled": 1.0
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.604,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.604
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.712,
+                "accuracy_on_filled": 0.6461
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.276,
+                "accuracy_on_filled": 1.0
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.276,
+                "accuracy_on_filled": 1.0
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.276,
+                "accuracy_on_filled": 1.0
+              }
+            ]
+          }
+        },
+        "naive_bayes": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.626,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.626
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.984,
+                "accuracy_on_filled": 0.6321
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.386,
+                "accuracy_on_filled": 0.8601
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.292,
+                "accuracy_on_filled": 0.9658
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.278,
+                "accuracy_on_filled": 0.9928
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.626,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.626
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.984,
+                "accuracy_on_filled": 0.6321
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.386,
+                "accuracy_on_filled": 0.8601
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.292,
+                "accuracy_on_filled": 0.9658
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.278,
+                "accuracy_on_filled": 0.9928
+              }
+            ]
+          }
+        },
+        "majority": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.346,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.346,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              }
+            ]
+          }
+        }
+      },
+      "habitat": {
+        "laya": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.684,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.684
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.686,
+                "accuracy_on_filled": 0.8426
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.504,
+                "accuracy_on_filled": 0.9841
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.504,
+                "accuracy_on_filled": 0.9841
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.498,
+                "accuracy_on_filled": 0.9839
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.684,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.684
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.686,
+                "accuracy_on_filled": 0.8426
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.504,
+                "accuracy_on_filled": 0.9841
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.504,
+                "accuracy_on_filled": 0.9841
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.498,
+                "accuracy_on_filled": 0.9839
+              }
+            ]
+          }
+        },
+        "naive_bayes": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.666,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.666
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.996,
+                "accuracy_on_filled": 0.6667
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.954,
+                "accuracy_on_filled": 0.6792
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.93,
+                "accuracy_on_filled": 0.6796
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.894,
+                "accuracy_on_filled": 0.6801
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.666,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.666
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.996,
+                "accuracy_on_filled": 0.6667
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.954,
+                "accuracy_on_filled": 0.6792
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.93,
+                "accuracy_on_filled": 0.6796
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.894,
+                "accuracy_on_filled": 0.6801
+              }
+            ]
+          }
+        },
+        "majority": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.462,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.462,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              }
+            ]
+          }
+        }
+      }
+    },
+    "all": {
+      "stalk-root": {
+        "laya": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.96,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.96
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.96
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.994,
+                "accuracy_on_filled": 0.9658
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.98,
+                "accuracy_on_filled": 0.9694
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.906,
+                "accuracy_on_filled": 0.9978
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.96,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.96
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.96
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.994,
+                "accuracy_on_filled": 0.9658
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.98,
+                "accuracy_on_filled": 0.9694
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.906,
+                "accuracy_on_filled": 0.9978
+              }
+            ]
+          }
+        },
+        "naive_bayes": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.954,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.954
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.954
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.972,
+                "accuracy_on_filled": 0.963
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.956,
+                "accuracy_on_filled": 0.9728
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.928,
+                "accuracy_on_filled": 0.9828
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.954,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.954
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.954
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.972,
+                "accuracy_on_filled": 0.963
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.956,
+                "accuracy_on_filled": 0.9728
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.928,
+                "accuracy_on_filled": 0.9828
+              }
+            ]
+          }
+        },
+        "majority": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.664,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.664,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.664
+              }
+            ]
+          }
+        }
+      },
+      "spore-print-color": {
+        "laya": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.596,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.596
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.766,
+                "accuracy_on_filled": 0.6319
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.276,
+                "accuracy_on_filled": 1.0
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.276,
+                "accuracy_on_filled": 1.0
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.276,
+                "accuracy_on_filled": 1.0
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.596,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.596
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.766,
+                "accuracy_on_filled": 0.6319
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.276,
+                "accuracy_on_filled": 1.0
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.276,
+                "accuracy_on_filled": 1.0
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.276,
+                "accuracy_on_filled": 1.0
+              }
+            ]
+          }
+        },
+        "naive_bayes": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.642,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.642
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.984,
+                "accuracy_on_filled": 0.6463
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.306,
+                "accuracy_on_filled": 0.9412
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.274,
+                "accuracy_on_filled": 0.9927
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.27,
+                "accuracy_on_filled": 0.9926
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.642,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.642
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.984,
+                "accuracy_on_filled": 0.6463
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.306,
+                "accuracy_on_filled": 0.9412
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.274,
+                "accuracy_on_filled": 0.9927
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.27,
+                "accuracy_on_filled": 0.9926
+              }
+            ]
+          }
+        },
+        "majority": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.346,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.346,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.346
+              }
+            ]
+          }
+        }
+      },
+      "habitat": {
+        "laya": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.678,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.678
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.714,
+                "accuracy_on_filled": 0.8235
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.504,
+                "accuracy_on_filled": 0.9841
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.504,
+                "accuracy_on_filled": 0.9841
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.5,
+                "accuracy_on_filled": 0.984
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.678,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.678
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.714,
+                "accuracy_on_filled": 0.8235
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.504,
+                "accuracy_on_filled": 0.9841
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.504,
+                "accuracy_on_filled": 0.9841
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.5,
+                "accuracy_on_filled": 0.984
+              }
+            ]
+          }
+        },
+        "naive_bayes": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.64,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.64
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.986,
+                "accuracy_on_filled": 0.6389
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.934,
+                "accuracy_on_filled": 0.6595
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.906,
+                "accuracy_on_filled": 0.6711
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.878,
+                "accuracy_on_filled": 0.6811
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.64,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.64
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 0.986,
+                "accuracy_on_filled": 0.6389
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 0.934,
+                "accuracy_on_filled": 0.6595
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 0.906,
+                "accuracy_on_filled": 0.6711
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 0.878,
+                "accuracy_on_filled": 0.6811
+              }
+            ]
+          }
+        },
+        "majority": {
+          "all": {
+            "n": 500,
+            "accuracy": 0.462,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              }
+            ]
+          },
+          "novel": {
+            "n": 500,
+            "accuracy": 0.462,
+            "curve": [
+              {
+                "threshold": 0.0,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.5,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.7,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.8,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              },
+              {
+                "threshold": 0.9,
+                "coverage": 1.0,
+                "accuracy_on_filled": 0.462
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

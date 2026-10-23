@@ -153,8 +153,8 @@ coverage. One seed and 1,000 rows, so treat the gaps as suggestive.
   comparable to the Adult numbers above.
 - The run is CPU-only and single-seed. Laya's own docs note that takeoff from the chance plateau is
   seed-dependent, so treat one run as a point estimate.
-- Checkpoints are not committed to git. The Adult v2 checkpoint is published on the Hugging Face Hub
-  (see [docs/MODEL.md](docs/MODEL.md)); other checkpoints are rebuilt from the run records in
+- Checkpoints are not committed to git. The v2 checkpoint, `laya-data-impute`, is published on the
+  Hugging Face Hub (see [docs/MODEL.md](docs/MODEL.md)) and was trained and evaluated on Adult only; other checkpoints are rebuilt from the run records in
   [docs/runs/](docs/runs/).
 
 ## Credits and license
