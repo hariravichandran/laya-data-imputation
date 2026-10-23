@@ -48,3 +48,21 @@ Files: [`adult-impute-v1.train_run.json`](adult-impute-v1.train_run.json) (confi
 - **Outcome.** Not a clear improvement over v1. See the v2 section of [../RESULTS.md](../RESULTS.md).
 
 Files: [`adult-impute-v2.train_run.json`](adult-impute-v2.train_run.json).
+
+
+## Benchmark runs (one per dataset)
+
+Produced by `scripts/run_benchmark.sh` on CPU: three epochs, effective batch 32, seed 0, evaluation on up to
+500 held-out rows. Each dataset has a `<dataset>-v1.train_run.json` and `<dataset>-v1.schema.json`:
+
+| dataset | rows sampled for training | views per row | training cases | training time |
+|---|---|---|---|---|
+| mushroom | up to 1,200 | 1 | 855 | 47 min |
+| votes | up to 348 (all) | 2 | 594 | 16 min |
+| breast-cancer | up to 229 (all) | 3 | 660 | 16 min |
+| bank | up to 1,200 | 1 | 813 | 35 min |
+| car | up to 1,000 | 2 | 2,000 | 37 min |
+
+Training cases are the masked records written to JSONL; Laya's trainer then splits off a calibration slice.
+
+Checkpoints are not committed. Rebuild one with `scripts/run_benchmark.sh data data/runs <dataset>`.

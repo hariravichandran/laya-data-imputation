@@ -1,0 +1,39 @@
+{
+  "columns": [
+    "buying",
+    "maint",
+    "doors",
+    "persons",
+    "lug_boot",
+    "safety",
+    "class"
+  ],
+  "targets": [
+    "buying",
+    "maint",
+    "safety"
+  ],
+  "bins": {},
+  "zero_nonzero": [],
+  "min_freq": 0.003,
+  "other_label": "Other",
+  "vocab": {
+    "buying": [
+      "high",
+      "vhigh",
+      "low",
+      "med"
+    ],
+    "maint": [
+      "low",
+      "vhigh",
+      "high",
+      "med"
+    ],
+    "safety": [
+      "low",
+      "high",
+      "med"
+    ]
+  }
+}

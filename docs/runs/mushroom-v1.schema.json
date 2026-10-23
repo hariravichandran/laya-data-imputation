@@ -1,0 +1,64 @@
+{
+  "columns": [
+    "class",
+    "cap-shape",
+    "cap-surface",
+    "cap-color",
+    "bruises",
+    "odor",
+    "gill-attachment",
+    "gill-spacing",
+    "gill-size",
+    "gill-color",
+    "stalk-shape",
+    "stalk-root",
+    "stalk-surface-above-ring",
+    "stalk-surface-below-ring",
+    "stalk-color-above-ring",
+    "stalk-color-below-ring",
+    "veil-type",
+    "veil-color",
+    "ring-number",
+    "ring-type",
+    "spore-print-color",
+    "population",
+    "habitat"
+  ],
+  "targets": [
+    "stalk-root",
+    "spore-print-color",
+    "habitat"
+  ],
+  "bins": {},
+  "zero_nonzero": [],
+  "min_freq": 0.003,
+  "other_label": "Other",
+  "vocab": {
+    "stalk-root": [
+      "b",
+      "e",
+      "c",
+      "r"
+    ],
+    "spore-print-color": [
+      "w",
+      "n",
+      "k",
+      "h",
+      "r",
+      "u",
+      "b",
+      "o",
+      "Other"
+    ],
+    "habitat": [
+      "d",
+      "g",
+      "p",
+      "l",
+      "u",
+      "m",
+      "w"
+    ]
+  }
+}

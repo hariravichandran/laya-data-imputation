@@ -1,0 +1,49 @@
+{
+  "columns": [
+    "party",
+    "vote-01",
+    "vote-02",
+    "vote-03",
+    "vote-04",
+    "vote-05",
+    "vote-06",
+    "vote-07",
+    "vote-08",
+    "vote-09",
+    "vote-10",
+    "vote-11",
+    "vote-12",
+    "vote-13",
+    "vote-14",
+    "vote-15",
+    "vote-16"
+  ],
+  "targets": [
+    "vote-01",
+    "vote-02",
+    "vote-03",
+    "vote-04"
+  ],
+  "bins": {},
+  "zero_nonzero": [],
+  "min_freq": 0.003,
+  "other_label": "Other",
+  "vocab": {
+    "vote-01": [
+      "n",
+      "y"
+    ],
+    "vote-02": [
+      "n",
+      "y"
+    ],
+    "vote-03": [
+      "y",
+      "n"
+    ],
+    "vote-04": [
+      "n",
+      "y"
+    ]
+  }
+}

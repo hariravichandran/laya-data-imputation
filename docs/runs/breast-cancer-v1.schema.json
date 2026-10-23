@@ -1,0 +1,35 @@
+{
+  "columns": [
+    "class",
+    "age",
+    "menopause",
+    "tumor-size",
+    "inv-nodes",
+    "node-caps",
+    "deg-malig",
+    "breast",
+    "breast-quad",
+    "irradiat"
+  ],
+  "targets": [
+    "node-caps",
+    "breast-quad"
+  ],
+  "bins": {},
+  "zero_nonzero": [],
+  "min_freq": 0.003,
+  "other_label": "Other",
+  "vocab": {
+    "node-caps": [
+      "no",
+      "yes"
+    ],
+    "breast-quad": [
+      "left_low",
+      "left_up",
+      "right_up",
+      "right_low",
+      "central"
+    ]
+  }
+}
