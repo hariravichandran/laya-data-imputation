@@ -15,11 +15,11 @@ from dataclasses import asdict
 from laya.train import TrainConfig, finetune
 
 from .data import load_adult, training_cases, write_jsonl
-from .schema import adult_schema
+from .schema import Schema, adult_schema
 
 
 def prepare(data_path: str, test_path: str, work_dir: str, *, views_per_row: int, seed: int,
-            max_train_rows: int | None, max_eval_items: int = 1000):
+            max_train_rows: int | None, max_eval_items: int = 1000, schema_path: str | None = None):
     """Write train/eval JSONL under `work_dir` and return (schema, train_path, eval_path, counts).
 
     The eval set is a random sample of `max_eval_items` held-out items: Laya scores it before and
@@ -31,7 +31,11 @@ def prepare(data_path: str, test_path: str, work_dir: str, *, views_per_row: int
     if max_train_rows:
         train_df = train_df.sample(n=min(max_train_rows, len(train_df)), random_state=seed)
 
-    schema = adult_schema().fit(train_df)
+    if schema_path:
+        # Continuing from a checkpoint: its vocabulary must not change, or its options stop matching.
+        schema = Schema.from_json(schema_path)
+    else:
+        schema = adult_schema().fit(train_df)
     train_cat = schema.discretise(train_df)
     train_cases = training_cases(train_cat, schema, views_per_row=views_per_row, seed=seed)
 
@@ -92,6 +96,8 @@ def main(argv=None):
                         help="must hold the state plus every option of the widest question; "
                              "smaller values silently drop the widest questions")
     parser.add_argument("--max-eval-items", type=int, default=300)
+    parser.add_argument("--schema", default=None,
+                        help="reuse this schema.json (e.g. the parent checkpoint's) instead of fitting one")
     parser.add_argument("--loss", default="rlcd", choices=["rlcd", "soft-ce"])
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--device", default="auto")
@@ -101,7 +107,8 @@ def main(argv=None):
     t0 = time.time()
     schema, train_path, eval_path, counts = prepare(
         args.train_csv, args.test_csv, work_dir, views_per_row=args.views_per_row,
-        seed=args.seed, max_train_rows=args.max_train_rows, max_eval_items=args.max_eval_items)
+        seed=args.seed, max_train_rows=args.max_train_rows, max_eval_items=args.max_eval_items,
+        schema_path=args.schema)
     print("prepared", counts, "vocab", {k: len(v) for k, v in schema.vocab.items()}, flush=True)
 
     config = TrainConfig(epochs=args.epochs, micro_batch=args.micro_batch, grad_accum=args.grad_accum,

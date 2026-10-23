@@ -27,3 +27,24 @@ committed; each record gives the exact command and settings needed to rebuild on
 
 Files: [`adult-impute-v1.train_run.json`](adult-impute-v1.train_run.json) (config and counts),
 [`adult-impute-v1.schema.json`](adult-impute-v1.schema.json) (vocabulary).
+
+## adult-impute-v2 (continued from v1 on a new sample)
+
+- **Command**
+  ```bash
+  python -m laya_impute.train --train-csv data/adult/adult.data --test-csv data/adult/adult.test \
+      --base runs/adult-impute-v1 --schema runs/adult-impute-v1/schema.json \
+      --out runs/adult-impute-v2 --max-train-rows 2000 --views-per-row 1 \
+      --epochs 2 --micro-batch 8 --grad-accum 4 --seed 1 --device cpu
+  ```
+- **Starting point.** The v1 checkpoint, with its `schema.json` reused so the vocabulary and
+  question options are identical to v1. The `--schema` option exists for this.
+- **Data.** A different 2,000-row sample of `adult.data` (seed 1) → 3,299 training items after the
+  calibration slice (366 items). 208 optimizer updates at effective batch 32, two epochs.
+- **Time.** 63 minutes on 32 CPU cores.
+- **Loss.** Epoch means 1.15 and 1.16. Individual step losses spiked (2.45 in epoch 2) and recovered;
+  a few steps were slightly negative, which the RLCD objective allows because its policy-gradient
+  term has zero-mean advantages.
+- **Outcome.** Not a clear improvement over v1. See the v2 section of [../RESULTS.md](../RESULTS.md).
+
+Files: [`adult-impute-v2.train_run.json`](adult-impute-v2.train_run.json).

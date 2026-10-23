@@ -92,6 +92,10 @@ Held-out Adult test rows, one target masked, other cells observed (full tables i
 | occupation | 0.301 | 0.323 | 0.140 | 1.000 (0.01) | 0.346 (0.03) |
 | native-country | 0.915 | 0.909 | 0.915 | 0.953 (0.93) | 0.954 (0.90) |
 
+A continued run (v2, two more epochs on new rows) did not change this picture; see the v2 section of
+[docs/RESULTS.md](docs/RESULTS.md). The two checkpoints trade coverage against precision differently,
+so choose a threshold per column on a validation split.
+
 In short, Laya does not beat the baselines on raw accuracy. Its confidence is well calibrated, so the
 cells it fills are more precise than Naive Bayes on the harder columns, at the cost of much lower
 coverage. One seed and 1,000 rows, so treat the gaps as suggestive.
