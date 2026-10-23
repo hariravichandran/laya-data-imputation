@@ -1,7 +1,7 @@
 __pycache__/
 *.pyc
 .venv/
-data/
-runs/
+/data/
+/runs/
 checkpoints/
 *.egg-info/
