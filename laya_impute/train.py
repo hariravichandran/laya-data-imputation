@@ -11,23 +11,27 @@ import os
 import random
 import time
 from dataclasses import asdict
+from typing import Optional
 
 from laya.train import TrainConfig, finetune
 
-from .data import load_adult, training_cases, write_jsonl
-from .schema import Schema, adult_schema
+from .data import training_cases, write_jsonl
+from .datasets import PRESETS, make_schema, prepare as prepare_csvs, read_table
+from .schema import Schema
 
 
-def prepare(data_path: str, test_path: str, work_dir: str, *, views_per_row: int, seed: int,
-            max_train_rows: int | None, max_eval_items: int = 1000, schema_path: str | None = None):
+def prepare(dataset: str, root: str, work_dir: str, *, views_per_row: int, seed: int,
+            max_train_rows: Optional[int], max_eval_items: int = 1000, schema_path: Optional[str] = None):
     """Write train/eval JSONL under `work_dir` and return (schema, train_path, eval_path, counts).
 
-    The eval set is a random sample of `max_eval_items` held-out items: Laya scores it before and
-    after training, so its size is what a run pays for twice.
+    The training pool and the held-out set come from the dataset preset (`datasets.py`). The eval
+    set is a random sample of `max_eval_items` held-out items: Laya scores it before and after
+    training, so its size is what a run pays for twice.
     """
     os.makedirs(work_dir, exist_ok=True)
-    train_df = load_adult(data_path)
-    test_df = load_adult(test_path) if test_path else None
+    csvs = prepare_csvs(dataset, root, os.path.join(work_dir, "prepared"), seed=seed)
+    train_df = read_table(csvs["train"])
+    test_df = read_table(csvs["test"])
     if max_train_rows:
         train_df = train_df.sample(n=min(max_train_rows, len(train_df)), random_state=seed)
 
@@ -35,23 +39,20 @@ def prepare(data_path: str, test_path: str, work_dir: str, *, views_per_row: int
         # Continuing from a checkpoint: its vocabulary must not change, or its options stop matching.
         schema = Schema.from_json(schema_path)
     else:
-        schema = adult_schema().fit(train_df)
+        schema = make_schema(PRESETS[dataset]).fit(train_df)
     train_cat = schema.discretise(train_df)
     train_cases = training_cases(train_cat, schema, views_per_row=views_per_row, seed=seed)
 
     train_path = os.path.join(work_dir, "train.jsonl")
     n_train = write_jsonl(train_cases, train_path)
 
-    eval_path = None
-    n_eval = 0
-    if test_df is not None:
-        # The test file is disjoint from the training file, so these items are held out.
-        test_cat = schema.discretise(test_df)
-        eval_cases = training_cases(test_cat, schema, views_per_row=1, seed=seed + 1)
-        if len(eval_cases) > max_eval_items:
-            eval_cases = random.Random(seed).sample(eval_cases, max_eval_items)
-        eval_path = os.path.join(work_dir, "eval.jsonl")
-        n_eval = write_jsonl(eval_cases, eval_path)
+    # The test file is disjoint from the training pool, so these items are held out.
+    test_cat = schema.discretise(test_df)
+    eval_cases = training_cases(test_cat, schema, views_per_row=1, seed=seed + 1)
+    if len(eval_cases) > max_eval_items:
+        eval_cases = random.Random(seed).sample(eval_cases, max_eval_items)
+    eval_path = os.path.join(work_dir, "eval.jsonl")
+    n_eval = write_jsonl(eval_cases, eval_path)
     return schema, train_path, eval_path, {"train_items": n_train, "eval_items": n_eval}
 
 
@@ -81,9 +82,9 @@ def resolve_base(base: str) -> str:
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    parser.add_argument("--train-csv", required=True,
-                        help="UCI Adult adult.data (comma-separated, no header, ? for missing)")
-    parser.add_argument("--test-csv", required=True, help="UCI Adult adult.test (held out)")
+    parser.add_argument("--dataset", default="adult", choices=sorted(PRESETS),
+                        help="dataset preset in laya_impute/datasets.py")
+    parser.add_argument("--root", default="data", help="folder holding one directory per dataset")
     parser.add_argument("--base", default="convaiinnovations/laya")
     parser.add_argument("--out", required=True, help="output checkpoint directory")
     parser.add_argument("--work-dir", default=None, help="where train/eval JSONL go (default: <out>/data)")
@@ -106,10 +107,10 @@ def main(argv=None):
     work_dir = args.work_dir or os.path.join(args.out, "data")
     t0 = time.time()
     schema, train_path, eval_path, counts = prepare(
-        args.train_csv, args.test_csv, work_dir, views_per_row=args.views_per_row,
+        args.dataset, args.root, work_dir, views_per_row=args.views_per_row,
         seed=args.seed, max_train_rows=args.max_train_rows, max_eval_items=args.max_eval_items,
         schema_path=args.schema)
-    print("prepared", counts, "vocab", {k: len(v) for k, v in schema.vocab.items()}, flush=True)
+    print("prepared", args.dataset, counts, "vocab", {k: len(v) for k, v in schema.vocab.items()}, flush=True)
 
     config = TrainConfig(epochs=args.epochs, micro_batch=args.micro_batch, grad_accum=args.grad_accum,
                          max_len=args.max_len, loss=args.loss, seed=args.seed, eval_data=eval_path)

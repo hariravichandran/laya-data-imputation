@@ -93,17 +93,6 @@ class Schema:
 
 
 def adult_schema() -> Schema:
-    """UCI Adult with numeric columns discretised and the three real-gap columns as targets."""
-    return Schema(
-        columns=["age", "workclass", "education", "marital-status", "occupation",
-                 "relationship", "race", "sex", "capital-gain", "capital-loss",
-                 "hours-per-week", "native-country", "income"],
-        targets=["workclass", "occupation", "native-country"],
-        bins={
-            "age": ([0, 25, 35, 45, 55, 65, 200],
-                    ["under 25", "25-34", "35-44", "45-54", "55-64", "65+"]),
-            "hours-per-week": ([0, 20, 35, 41, 50, 200],
-                               ["under 20", "20-34", "35-40", "41-49", "50+"]),
-        },
-        zero_nonzero=["capital-gain", "capital-loss"],
-    )
+    """UCI Adult's schema, from its dataset preset (see `datasets.py`)."""
+    from .datasets import PRESETS, make_schema
+    return make_schema(PRESETS["adult"])

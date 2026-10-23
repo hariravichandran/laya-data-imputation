@@ -19,9 +19,9 @@ from typing import Dict, List, Optional
 import numpy as np
 import pandas as pd
 
-from .data import load_adult
+from .datasets import PRESETS, make_schema, read_table
 from .impute import Imputer
-from .schema import Schema, adult_schema
+from .schema import Schema
 
 THRESHOLDS = [0.0, 0.5, 0.7, 0.8, 0.9]
 
@@ -83,7 +83,7 @@ def _metrics(records: List[Dict]) -> Dict:
 
 def evaluate(checkpoint_dir: Optional[str], train_csv: str, test_csv: str, n_rows: int = 1000, seed: int = 0,
              device: Optional[str] = None, out_path: Optional[str] = None,
-             max_train_rows: Optional[int] = None) -> Dict:
+             max_train_rows: Optional[int] = None, dataset: str = "adult") -> Dict:
     """Score Laya (`checkpoint_dir`) and the baselines on held-out rows.
 
     With `checkpoint_dir=None` only the baselines run, using a vocabulary fitted on the training
@@ -91,14 +91,14 @@ def evaluate(checkpoint_dir: Optional[str], train_csv: str, test_csv: str, n_row
     `max_train_rows` / `seed` must match the training run, so the baselines see the same rows
     Laya was trained on.
     """
-    train_raw = load_adult(train_csv)
-    test_raw = load_adult(test_csv)
+    train_raw = read_table(train_csv)
+    test_raw = read_table(test_csv)
     if max_train_rows:
         train_raw = train_raw.sample(n=min(max_train_rows, len(train_raw)), random_state=seed)
     if checkpoint_dir:
         schema = Schema.from_json(os.path.join(checkpoint_dir, "schema.json"))
     else:
-        schema = adult_schema().fit(train_raw)
+        schema = make_schema(PRESETS[dataset]).fit(train_raw)
 
     # Baseline training data: complete rows of the training file, mapped through the vocabulary.
     train_cat = schema.discretise(train_raw)
@@ -217,9 +217,10 @@ if __name__ == "__main__":
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--device", default=None)
     parser.add_argument("--out", default=None)
+    parser.add_argument("--dataset", default="adult", help="preset name, used only without --checkpoint")
     parser.add_argument("--max-train-rows", type=int, default=None,
                         help="the --max-train-rows used for training (default: all rows)")
     a = parser.parse_args()
     res = evaluate(a.checkpoint, a.train_csv, a.test_csv, a.n_rows, a.seed, a.device, a.out,
-                   max_train_rows=a.max_train_rows)
+                   max_train_rows=a.max_train_rows, dataset=a.dataset)
     print(format_table(res))

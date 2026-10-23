@@ -12,21 +12,10 @@ import pandas as pd
 
 from .schema import Schema
 
-ADULT_NAMES = ["age", "workclass", "fnlwgt", "education", "education-num", "marital-status",
-               "occupation", "relationship", "race", "sex", "capital-gain", "capital-loss",
-               "hours-per-week", "native-country", "income"]
-
-
 def load_adult(path: str) -> pd.DataFrame:
-    """Read one UCI Adult file, either `adult.data` or `adult.test`.
-
-    `?` cells become NaN. `adult.test` starts with a `|1x3 Cross validator` line (skipped as a
-    comment) and labels its income with a trailing period, which is stripped here so both files
-    give the same categories.
-    """
-    df = pd.read_csv(path, names=ADULT_NAMES, skipinitialspace=True, na_values="?", comment="|")
-    df["income"] = df["income"].astype("string").str.rstrip(".")
-    return df
+    """Read one UCI Adult file (`adult.data` or `adult.test`) through the Adult preset."""
+    from .datasets import PRESETS, read_raw
+    return read_raw(PRESETS["adult"], path)
 
 
 def state_text(cat_row: Dict[str, Optional[str]], columns: Sequence[str], hidden: Iterable[str] = ()) -> str:
