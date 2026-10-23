@@ -3,7 +3,8 @@
 The checkpoint itself is not stored in git. It is published on the Hugging Face Hub, and this page
 documents what it is, how it was made and how it was evaluated.
 
-**Hub repository:** pending upload (see [Publishing](#publishing)).
+**Hub repository:** [hravi/laya-adult-impute-v2](https://huggingface.co/hravi/laya-adult-impute-v2)
+(private at the time of writing; the owner decides when to make it public).
 
 ## What it is
 
@@ -42,6 +43,6 @@ imputed values reproduce the patterns in that census sample.
 
 ## Publishing
 
-The checkpoint is uploaded with `scripts/publish_hf.py` from a staged folder that holds the model card.
+The checkpoint was uploaded with `scripts/publish_hf.py` from a staged folder that holds the model card.
 Git keeps this document, the run records and the results. The Hub repository is created private by default
 and made public only once you decide to share it.

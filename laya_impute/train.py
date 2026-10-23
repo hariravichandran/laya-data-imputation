@@ -21,7 +21,8 @@ from .schema import Schema
 
 
 def prepare(dataset: str, root: str, work_dir: str, *, views_per_row: int, seed: int,
-            max_train_rows: Optional[int], max_eval_items: int = 1000, schema_path: Optional[str] = None):
+            max_train_rows: Optional[int], max_eval_items: int = 1000, schema_path: Optional[str] = None,
+            prepared_dir: Optional[str] = None):
     """Write train/eval JSONL under `work_dir` and return (schema, train_path, eval_path, counts).
 
     The training pool and the held-out set come from the dataset preset (`datasets.py`). The eval
@@ -29,7 +30,7 @@ def prepare(dataset: str, root: str, work_dir: str, *, views_per_row: int, seed:
     training, so its size is what a run pays for twice.
     """
     os.makedirs(work_dir, exist_ok=True)
-    csvs = prepare_csvs(dataset, root, os.path.join(work_dir, "prepared"), seed=seed)
+    csvs = prepare_csvs(dataset, root, prepared_dir or os.path.join(work_dir, "prepared"), seed=seed)
     train_df = read_table(csvs["train"])
     test_df = read_table(csvs["test"])
     if max_train_rows:
@@ -107,7 +108,8 @@ def main(argv=None):
     work_dir = args.work_dir or os.path.join(args.out, "data")
     t0 = time.time()
     schema, train_path, eval_path, counts = prepare(
-        args.dataset, args.root, work_dir, views_per_row=args.views_per_row,
+        args.dataset, args.root, work_dir, prepared_dir=os.path.join(args.out, "prepared"),
+        views_per_row=args.views_per_row,
         seed=args.seed, max_train_rows=args.max_train_rows, max_eval_items=args.max_eval_items,
         schema_path=args.schema)
     print("prepared", args.dataset, counts, "vocab", {k: len(v) for k, v in schema.vocab.items()}, flush=True)

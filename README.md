@@ -33,23 +33,65 @@ python -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt pytest
 python -m pytest -q tests/                 # no model needed
 
-scripts/fetch_adult.sh data/adult          # UCI Adult, CC BY 4.0
+scripts/fetch_datasets.sh                  # raw files for all six presets (see Datasets)
 
 # Fine-tune on CPU (about two hours at these settings; a GPU is much faster)
-python -m laya_impute.train \
-    --train-csv data/adult/adult.data --test-csv data/adult/adult.test \
-    --out runs/adult-impute-v1 --max-train-rows 2000 --views-per-row 1 \
+python -m laya_impute.train --dataset adult --root data --out runs/adult-impute-v1 \
+    --max-train-rows 2000 --views-per-row 1 \
     --epochs 3 --micro-batch 8 --grad-accum 4 --device cpu
 
 # Impute a CSV with the same column names
-python -m laya_impute impute --checkpoint runs/adult-impute-v1 \
-    --input data/adult/adult.data --output filled.csv --audit audit.csv --min-confidence 0.5
+# --input is a CSV with a header row using the schema's column names (see schema.json in the checkpoint)
+python -m laya_impute impute --checkpoint runs/adult-impute-v2 \
+    --input my_records.csv --output filled.csv --audit audit.csv --min-confidence 0.5
 
-# Held-out evaluation against baselines
+# Held-out evaluation against baselines. The trainer writes the prepared CSVs to <out>/data/prepared/.
 python -m laya_impute.evaluate --checkpoint runs/adult-impute-v1 \
-    --train-csv data/adult/adult.data --test-csv data/adult/adult.test \
+    --train-csv runs/adult-impute-v1/data/prepared/train.csv \
+    --test-csv runs/adult-impute-v1/data/prepared/test.csv \
     --n-rows 1000 --max-train-rows 2000 --out docs/results/laya-adult-v1.json
 ```
+
+## Datasets
+
+Six presets are defined in `laya_impute/datasets.py`. Each one names its raw file, its columns, the
+token that means "missing", and the columns to impute. All six come from the
+[UCI Machine Learning Repository](https://archive.ics.uci.edu/) and are licensed CC BY 4.0.
+
+`scripts/fetch_datasets.sh [data_root]` downloads the raw archives into `data/` (the default data root).
+It skips any dataset whose files are already present, never overwrites a file, and exits non-zero if an
+expected file is missing. `adult` goes to `data/adult/`; the other five go to `data/datasets/<name>/`.
+
+| Preset | What it is | Source | License | Imputation targets | Missing token |
+|---|---|---|---|---|---|
+| `adult` | UCI Adult census income. Trains on `adult.data`, tests on `adult.test`. | [dataset/2](https://archive.ics.uci.edu/dataset/2/adult) | CC BY 4.0 | `workclass`, `occupation`, `native-country` | `?` |
+| `mushroom` | Agaricus-lepiota mushroom records, one letter per value. | [dataset/73](https://archive.ics.uci.edu/dataset/73/mushroom) | CC BY 4.0 | `stalk-root`, `spore-print-color`, `habitat` | `?` |
+| `votes` | 1984 US House votes (yes, no, or abstain). | [dataset/105](https://archive.ics.uci.edu/dataset/105/congressional+voting+records) | CC BY 4.0 | `vote-01` to `vote-04` | `?` |
+| `breast-cancer` | Ljubljana breast cancer recurrence. | [dataset/14](https://archive.ics.uci.edu/dataset/14/breast+cancer) | CC BY 4.0 | `node-caps`, `breast-quad` | `?` |
+| `bank` | Portuguese bank marketing. Semicolon-separated with a header row. | [dataset/222](https://archive.ics.uci.edu/dataset/222/bank+marketing) | CC BY 4.0 | `job`, `education`, `contact` | `unknown` |
+| `car` | Car evaluation. Complete data, so no cell is missing in the raw file. | [dataset/19](https://archive.ics.uci.edu/dataset/19/car+evaluation) | CC BY 4.0 | `buying`, `maint`, `safety` | none |
+
+Train and evaluate one preset:
+
+```bash
+scripts/fetch_datasets.sh
+python -m laya_impute.train --dataset <name> --root data --out runs/<name>-v1 \
+    --max-train-rows <rows> --views-per-row <views> --epochs 3 \
+    --micro-batch 8 --grad-accum 4 --seed 0 --device cpu
+python -m laya_impute.evaluate --checkpoint runs/<name>-v1 \
+    --train-csv runs/<name>-v1/data/prepared/train.csv --test-csv runs/<name>-v1/data/prepared/test.csv \
+    --n-rows 500 --max-train-rows <rows> --out docs/results/<name>-v1.json
+```
+
+To train and evaluate the five presets other than `adult`, each with its own training budget, run
+`scripts/run_benchmark.sh`. It runs on CPU, one preset after another, and by default writes checkpoints
+under `data/runs/` (pass a second argument to change that).
+
+**Test sets.** `adult` has its own held-out file. The other five have only one file, so `prepare` holds
+out a random 20% of the rows (seed 0) as the test set. For `votes` (435 rows) that is about 87 test rows,
+and for `breast-cancer` (286 rows) about 57. Their evaluations are noisy: a single wrong answer moves
+accuracy by about 1 point on `votes` and about 2 points on `breast-cancer`. Treat differences between Laya
+and the baselines on those two as unreliable until they are checked over several seeds.
 
 Input CSVs may mark missing cells as blank or `?`. Column names must match the schema.
 
@@ -106,9 +148,14 @@ coverage. One seed and 1,000 rows, so treat the gaps as suggestive.
   (industry, job title) that the other columns do not carry; no method recovers it reliably.
 - The evaluation masks observed cells artificially. Real missingness need not be random, so
   accuracy on real gaps can differ.
+- Small presets give noisy numbers. `votes` and `breast-cancer` have about 87 and 57 test rows, so
+  their per-column accuracies move by a point or more with one answer. Their results are not yet
+  comparable to the Adult numbers above.
 - The run is CPU-only and single-seed. Laya's own docs note that takeoff from the chance plateau is
   seed-dependent, so treat one run as a point estimate.
-- No model checkpoint is committed. Train one with the command above.
+- Checkpoints are not committed to git. The Adult v2 checkpoint is published on the Hugging Face Hub
+  (see [docs/MODEL.md](docs/MODEL.md)); other checkpoints are rebuilt from the run records in
+  [docs/runs/](docs/runs/).
 
 ## Credits and license
 
