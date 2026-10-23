@@ -117,7 +117,9 @@ def evaluate(checkpoint_dir: Optional[str], train_csv: str, test_csv: str, n_row
     # Adult's categorical profiles repeat, so a held-out record can be an exact copy of a training
     # record. Those copies are reported separately: the "novel" subset excludes them.
     def _key(frame):
-        return frame[schema.columns].astype(str).agg("|".join, axis=1)
+        # Missing cells become empty fields; astype(str) would leave NaN, which cannot be joined.
+        return frame[schema.columns].apply(
+            lambda row: "|".join("" if pd.isna(v) else str(v) for v in row), axis=1)
     seen = set(_key(train[schema.columns]))
     novel = ~_key(sample).isin(seen).to_numpy()
     results_overlap = {"sample_rows": int(len(sample)), "novel_rows": int(novel.sum())}
