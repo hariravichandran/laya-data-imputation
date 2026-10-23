@@ -26,6 +26,13 @@ project's.
 - **Auditable.** `--audit` writes every decision: the value, its confidence, its status, and the
   full probability vector over the column's vocabulary.
 
+## Documentation
+
+- [docs/METHODOLOGY.md](docs/METHODOLOGY.md): how the models are built, split, trained and evaluated, and the threats to validity.
+- [docs/MODEL.md](docs/MODEL.md): the published model, its scope and its results.
+- [docs/RESULTS.md](docs/RESULTS.md): held-out results for every dataset.
+- [docs/runs/](docs/runs/): run records (settings, schema) for every checkpoint.
+
 ## Quick start
 
 ```bash

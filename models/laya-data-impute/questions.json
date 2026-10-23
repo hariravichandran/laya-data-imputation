@@ -1,0 +1,51 @@
+{
+  "native-country": {
+    "type": "choice",
+    "instructions": "Which native-country best fits this record?",
+    "criteria": {
+      "United-States": "native-country = United-States",
+      "Mexico": "native-country = Mexico",
+      "Philippines": "native-country = Philippines",
+      "India": "native-country = India",
+      "Germany": "native-country = Germany",
+      "El-Salvador": "native-country = El-Salvador",
+      "Canada": "native-country = Canada",
+      "England": "native-country = England",
+      "Cuba": "native-country = Cuba",
+      "Dominican-Republic": "native-country = Dominican-Republic",
+      "Other": "native-country = Other"
+    }
+  },
+  "occupation": {
+    "type": "choice",
+    "instructions": "Which occupation best fits this record?",
+    "criteria": {
+      "Exec-managerial": "occupation = Exec-managerial",
+      "Prof-specialty": "occupation = Prof-specialty",
+      "Craft-repair": "occupation = Craft-repair",
+      "Sales": "occupation = Sales",
+      "Adm-clerical": "occupation = Adm-clerical",
+      "Other-service": "occupation = Other-service",
+      "Machine-op-inspct": "occupation = Machine-op-inspct",
+      "Transport-moving": "occupation = Transport-moving",
+      "Handlers-cleaners": "occupation = Handlers-cleaners",
+      "Farming-fishing": "occupation = Farming-fishing",
+      "Tech-support": "occupation = Tech-support",
+      "Protective-serv": "occupation = Protective-serv",
+      "Priv-house-serv": "occupation = Priv-house-serv",
+      "Other": "occupation = Other"
+    }
+  },
+  "workclass": {
+    "type": "choice",
+    "instructions": "Which workclass best fits this record?",
+    "criteria": {
+      "Private": "workclass = Private",
+      "Self-emp-not-inc": "workclass = Self-emp-not-inc",
+      "Local-gov": "workclass = Local-gov",
+      "State-gov": "workclass = State-gov",
+      "Self-emp-inc": "workclass = Self-emp-inc",
+      "Federal-gov": "workclass = Federal-gov"
+    }
+  }
+}

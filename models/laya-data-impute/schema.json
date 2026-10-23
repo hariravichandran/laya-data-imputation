@@ -1,0 +1,105 @@
+{
+  "columns": [
+    "age",
+    "workclass",
+    "education",
+    "marital-status",
+    "occupation",
+    "relationship",
+    "race",
+    "sex",
+    "capital-gain",
+    "capital-loss",
+    "hours-per-week",
+    "native-country",
+    "income"
+  ],
+  "targets": [
+    "workclass",
+    "occupation",
+    "native-country"
+  ],
+  "bins": {
+    "age": [
+      [
+        0,
+        25,
+        35,
+        45,
+        55,
+        65,
+        200
+      ],
+      [
+        "under 25",
+        "25-34",
+        "35-44",
+        "45-54",
+        "55-64",
+        "65+"
+      ]
+    ],
+    "hours-per-week": [
+      [
+        0,
+        20,
+        35,
+        41,
+        50,
+        200
+      ],
+      [
+        "under 20",
+        "20-34",
+        "35-40",
+        "41-49",
+        "50+"
+      ]
+    ]
+  },
+  "zero_nonzero": [
+    "capital-gain",
+    "capital-loss"
+  ],
+  "min_freq": 0.003,
+  "other_label": "Other",
+  "vocab": {
+    "workclass": [
+      "Private",
+      "Self-emp-not-inc",
+      "Local-gov",
+      "State-gov",
+      "Self-emp-inc",
+      "Federal-gov"
+    ],
+    "occupation": [
+      "Exec-managerial",
+      "Prof-specialty",
+      "Craft-repair",
+      "Sales",
+      "Adm-clerical",
+      "Other-service",
+      "Machine-op-inspct",
+      "Transport-moving",
+      "Handlers-cleaners",
+      "Farming-fishing",
+      "Tech-support",
+      "Protective-serv",
+      "Priv-house-serv",
+      "Other"
+    ],
+    "native-country": [
+      "United-States",
+      "Mexico",
+      "Philippines",
+      "India",
+      "Germany",
+      "El-Salvador",
+      "Canada",
+      "England",
+      "Cuba",
+      "Dominican-Republic",
+      "Other"
+    ]
+  }
+}
